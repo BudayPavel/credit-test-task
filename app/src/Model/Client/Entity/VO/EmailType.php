@@ -9,8 +9,6 @@ use Doctrine\DBAL\Types\StringType;
 
 class EmailType extends StringType
 {
-    final public const NAME = 'user_email';
-
     public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
         return $value instanceof Email ? $value->getValue() : $value;
@@ -23,7 +21,7 @@ class EmailType extends StringType
 
     public function getName(): string
     {
-        return self::NAME;
+        return Email::NAME;
     }
 
     public function requiresSQLCommentHint(AbstractPlatform $platform): bool

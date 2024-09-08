@@ -9,8 +9,6 @@ use Doctrine\DBAL\Types\GuidType;
 
 final class IdType extends GuidType
 {
-    final public const NAME = 'user_uuid';
-
     public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
         return $value instanceof Id ? $value->getValue() : $value;
@@ -23,7 +21,7 @@ final class IdType extends GuidType
 
     public function getName(): string
     {
-        return self::NAME;
+        return Id::NAME;
     }
 
     public function requiresSQLCommentHint(AbstractPlatform $platform): bool

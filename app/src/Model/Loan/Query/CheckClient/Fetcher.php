@@ -21,7 +21,7 @@ final readonly class Fetcher
             ->select('age, state, fico_score, monthly_income')
             ->from(Loan::CLIENT_TABLE)
             ->andWhere('id = :client_id')
-            ->setParameter('client_id', $query->clientId);
+            ->setParameter('client_id', $query->clientId->getValue());
 
         /** @var array<string,string> $client */
         $client = $qb->fetchAssociative();

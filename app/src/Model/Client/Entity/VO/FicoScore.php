@@ -6,13 +6,13 @@ namespace App\Model\Client\Entity\VO;
 
 use Webmozart\Assert\Assert;
 
-final class FicoScore
+final readonly class FicoScore
 {
     public const NAME = 'client_fico_score';
     public const MIN = 300;
     public const MAX = 850;
 
-    private readonly int $value;
+    private int $value;
 
     public function __construct(int $value)
     {

@@ -42,7 +42,7 @@ final class ClientTestFixtures extends Fixture implements FixtureGroupInterface
 
     public function load(ObjectManager $manager): void
     {
-        $command = new Command(
+        $this->handler->handle(new Command(
             id: self::TEST_UUID,
             firstName: $this->factory->firstName,
             lastName: $this->factory->lastName,
@@ -50,13 +50,11 @@ final class ClientTestFixtures extends Fixture implements FixtureGroupInterface
             state: State::CA->value,
             city: $this->factory->city,
             zipCode: $this->factory->postcode,
-            ssn: $this->factory->randomNumber(),
+            ssn: (string) $this->factory->randomNumber(),
             ficoScore: $this->factory->numberBetween(FicoScore::MIN, FicoScore::MAX),
             email: $this->factory->email,
             phone: $this->factory->phoneNumber,
-        );
-
-        $this->handler->handle($command);
+        ));
     }
 
     public static function getCreatedContent(): array

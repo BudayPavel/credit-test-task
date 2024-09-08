@@ -6,13 +6,13 @@ namespace App\Model\Client\Entity\VO;
 
 use Webmozart\Assert\Assert;
 
-final class Age
+final readonly class Age
 {
     public const NAME = 'client_age';
     public const MIN = 18;
     public const MAX = 60;
 
-    private readonly int $value;
+    private int $value;
 
     public function __construct(int $value)
     {

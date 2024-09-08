@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Model\Loan\Controller\Client;
+namespace App\Model\Loan\Controller\Loan;
 
 use App\Model\Loan\Entity\VO\Id;
 use App\Model\Loan\Query\CheckClient\Fetcher;

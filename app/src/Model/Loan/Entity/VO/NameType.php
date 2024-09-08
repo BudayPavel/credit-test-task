@@ -9,8 +9,6 @@ use Doctrine\DBAL\Types\StringType;
 
 class NameType extends StringType
 {
-    final public const NAME = 'user_name';
-
     public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
         return $value instanceof Name ? $value->getValue() : $value;
@@ -23,7 +21,7 @@ class NameType extends StringType
 
     public function getName(): string
     {
-        return self::NAME;
+        return Name::NAME;
     }
 
     public function requiresSQLCommentHint(AbstractPlatform $platform): bool

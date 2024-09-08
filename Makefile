@@ -43,10 +43,10 @@ cs:
 	docker-compose run --rm credit-test-php-cli composer cs-check
 
 deep-module:
-	docker-compose run --rm credit-test-php-cli php bin/deptrac.phar analyze bin/deeptrac.yaml
+	docker compose run --rm credit-test-php-cli php bin/deptrac.phar analyze --config-file=bin/deeptrac.yaml
 
 deep-layers:
-	docker-compose run --rm credit-test-php-cli php bin/deptrac.phar analyze bin/deeptrac-layers.yaml
+	docker compose run --rm credit-test-php-cli php bin/deptrac.phar analyze --config-file=bin/deeptrac-layers.yaml
 
 rector:
 	docker-compose run --rm credit-test-php-cli vendor/bin/rector process src --dry-run
@@ -55,4 +55,4 @@ schema-validate:
 	docker-compose run --rm credit-test-php-cli php bin/console do:schema:validate
 
 test:
-	docker compose run --rm prototype-kaliti-php-cli composer test
+	docker compose run --rm credit-test-php-cli composer test

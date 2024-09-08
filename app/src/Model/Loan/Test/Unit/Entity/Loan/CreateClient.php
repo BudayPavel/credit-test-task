@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Model\Loan\Test\Unit\Entity\User;
+namespace App\Model\Loan\Test\Unit\Entity\Loan;
 
 use App\Model\Loan\Entity\Loan\Loan;
 use App\Model\Loan\Test\Unit\Builder\LoanBuilder;

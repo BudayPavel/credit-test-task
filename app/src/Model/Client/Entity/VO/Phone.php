@@ -6,10 +6,10 @@ namespace App\Model\Client\Entity\VO;
 
 use Webmozart\Assert\Assert;
 
-final class Phone
+final readonly class Phone
 {
     public const NAME = 'client_phone';
-    private readonly string $value;
+    private string $value;
 
     public function __construct(string $value)
     {

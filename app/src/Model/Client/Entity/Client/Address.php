@@ -10,21 +10,15 @@ use App\Model\Client\Entity\VO\ZipCode;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Embeddable]
-class Address
+readonly class Address
 {
-    #[ORM\Column(type: City::NAME, length: City::MAX_LENGTH)]
-    private readonly City $city;
-
-    #[ORM\Column(type: ZipCode::NAME, length: ZipCode::MAX_LENGTH)]
-    private readonly ZipCode $zipCode;
-
-    #[ORM\Column(type: State::NAME)]
-    private readonly State $state;
-
-    public function __construct(City $city, ZipCode $zipCode, State $state)
-    {
-        $this->city = $city;
-        $this->state = $state;
-        $this->zipCode = $zipCode;
+    public function __construct(
+        #[ORM\Column(type: City::NAME, length: City::MAX_LENGTH)]
+        private City $city,
+        #[ORM\Column(type: ZipCode::NAME, length: ZipCode::MAX_LENGTH)]
+        private ZipCode $zipCode,
+        #[ORM\Column(type: State::NAME)]
+        private State $state,
+    ) {
     }
 }

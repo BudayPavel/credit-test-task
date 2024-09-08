@@ -24,7 +24,11 @@ final class ListTest extends DbWebTestCase
             ]
         );
 
-        $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(
+            Response::HTTP_OK,
+            $this->client->getResponse()->getStatusCode(),
+            $this->client->getResponse()->getContent(),
+        );
         $this->assertJson($content = $this->client->getResponse()->getContent());
 
         $data = json_decode($content, true, 512, JSON_THROW_ON_ERROR);

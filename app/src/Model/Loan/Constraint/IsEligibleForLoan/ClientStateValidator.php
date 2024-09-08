@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Model\Company\Constraint\Exist;
+namespace App\Model\Loan\Constraint\IsEligibleForLoan;
 
 use App\Model\Loan\Entity\VO\State;
 use App\Service\RandomRejection\RandomRejectionInterface;
@@ -26,7 +26,7 @@ final class ClientStateValidator extends ConstraintValidator
             $this->context->buildViolation($constraint->message)->addViolation();
         }
 
-        if ($state->isEqual(State::NY) && $this->randomRejection->rand()) {
+        if ($state?->isEqual(State::NY) && !$this->randomRejection->rand()) {
             $this->context->buildViolation($constraint->messageForNY)->addViolation();
         }
     }

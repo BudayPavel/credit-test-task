@@ -6,12 +6,12 @@ namespace App\Model\Client\Entity\VO;
 
 use Webmozart\Assert\Assert;
 
-final class ZipCode
+final readonly class ZipCode
 {
     public const NAME = 'client_zip_code';
     public const MAX_LENGTH = 10;
 
-    private readonly string $value;
+    private string $value;
 
     public function __construct(string $value)
     {

@@ -20,57 +20,30 @@ class Client
 {
     public const TABLE = 'clients';
 
-    #[ORM\Column(type: Id::NAME)]
-    #[ORM\Id]
-    private readonly Id $id;
-
-    #[ORM\Column(type: Email::NAME)]
-    private Email $email;
-
-    #[ORM\Column(type: Name::NAME)]
-    private Name $firstName;
-
-    #[ORM\Column(type: Name::NAME)]
-    private Name $lastName;
-
-    #[ORM\Column(type: Age::NAME)]
-    private Age $age;
-
-    #[ORM\Embedded(class: Address::class)]
-    private Address $address;
-
-    #[ORM\Column(type: Phone::NAME)]
-    private Phone $phone;
-
-    #[ORM\Column(type: FicoScore::NAME)]
-    private FicoScore $ficoScore;
-
-    #[ORM\Column(type: Number::NAME, length: Number::MAX_LENGTH)]
-    private Number $ssn;
-
     #[ORM\Column(type: Quantity::NAME, precision: 10, scale: 2, nullable: true)]
     private ?Quantity $monthlyIncome = null;
 
     private function __construct(
-        Id $id,
-        Email $email,
-        Name $firstName,
-        Name $lastName,
-        Age $age,
-        Address $address,
-        Phone $phone,
-        FicoScore $ficoScore,
-        Number $ssn,
+        #[ORM\Column(type: Id::NAME)]
+        #[ORM\Id]
+        private readonly Id $id,
+        #[ORM\Column(type: Email::NAME)]
+        private Email $email,
+        #[ORM\Column(type: Name::NAME)]
+        private Name $firstName,
+        #[ORM\Column(type: Name::NAME)]
+        private Name $lastName,
+        #[ORM\Column(type: Age::NAME)]
+        private Age $age,
+        #[ORM\Embedded(class: Address::class)]
+        private Address $address,
+        #[ORM\Column(type: Phone::NAME)]
+        private Phone $phone,
+        #[ORM\Column(type: FicoScore::NAME)]
+        private FicoScore $ficoScore,
+        #[ORM\Column(type: Number::NAME, length: Number::MAX_LENGTH)]
+        private Number $ssn,
     ) {
-        $this->id = $id;
-        $this->email = $email;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->age = $age;
-        $this->address = $address;
-        $this->phone = $phone;
-        $this->ficoScore = $ficoScore;
-        $this->ssn = $ssn;
     }
 
     public static function create(

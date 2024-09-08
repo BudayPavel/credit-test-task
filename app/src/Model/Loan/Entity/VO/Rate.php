@@ -6,11 +6,11 @@ namespace App\Model\Loan\Entity\VO;
 
 use Webmozart\Assert\Assert;
 
-final class Rate
+final readonly class Rate
 {
     public const NAME = 'loan_rate';
     public const CALIFORNIA_INTEREST_RATE_INCREASE = 11.49;
-    private readonly float $value;
+    private float $value;
 
     public function __construct(float $value)
     {

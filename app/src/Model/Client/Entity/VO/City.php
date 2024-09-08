@@ -6,12 +6,12 @@ namespace App\Model\Client\Entity\VO;
 
 use Webmozart\Assert\Assert;
 
-final class City
+final readonly class City
 {
     public const NAME = 'client_city';
     public const MAX_LENGTH = 100;
 
-    private readonly string $value;
+    private string $value;
 
     public function __construct(string $value)
     {

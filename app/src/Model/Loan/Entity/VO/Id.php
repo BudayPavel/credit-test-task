@@ -7,10 +7,10 @@ namespace App\Model\Loan\Entity\VO;
 use Ramsey\Uuid\Uuid;
 use Webmozart\Assert\Assert;
 
-final class Id implements \Stringable
+final readonly class Id implements \Stringable
 {
     public const NAME = 'loan_uuid';
-    private readonly string $value;
+    private string $value;
 
     public function __construct(string $value)
     {

@@ -22,7 +22,11 @@ final class CreateTest extends DbWebTestCase
             content: json_encode(ClientTestFixtures::getCreatedContent(), JSON_THROW_ON_ERROR),
         );
 
-        $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(
+            Response::HTTP_OK,
+            $this->client->getResponse()->getStatusCode(),
+            $this->client->getResponse()->getContent(),
+        );
         $this->assertJson($content = $this->client->getResponse()->getContent());
 
         $data = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
@@ -39,7 +43,11 @@ final class CreateTest extends DbWebTestCase
             content: json_encode(ClientTestFixtures::getCreatedContent(), JSON_THROW_ON_ERROR),
         );
 
-        $this->assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(
+            Response::HTTP_NOT_FOUND,
+            $this->client->getResponse()->getStatusCode(),
+            $this->client->getResponse()->getContent(),
+        );
         $this->assertJson($content = $this->client->getResponse()->getContent());
 
         $data = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
@@ -53,10 +61,17 @@ final class CreateTest extends DbWebTestCase
             method: 'POST',
             uri: '/client/create',
             server: ['CONTENT_TYPE' => 'application/json'],
-            content: json_encode([...ClientTestFixtures::getCreatedContent(), ...['phone' => 'test']], JSON_THROW_ON_ERROR),
+            content: json_encode(
+                [...ClientTestFixtures::getCreatedContent(), ...['phone' => 'test']],
+                JSON_THROW_ON_ERROR,
+            ),
         );
 
-        $this->assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(
+            Response::HTTP_BAD_REQUEST,
+            $this->client->getResponse()->getStatusCode(),
+            $this->client->getResponse()->getContent(),
+        );
         $this->assertJson($content = $this->client->getResponse()->getContent());
 
         $data = json_decode($content, true, 512, JSON_THROW_ON_ERROR);

@@ -6,10 +6,10 @@ namespace App\Model\Loan\Entity\VO;
 
 use Webmozart\Assert\Assert;
 
-final class Amount
+final readonly class Amount
 {
     public const NAME = 'loan_amount';
-    private readonly float $value;
+    private float $value;
 
     public function __construct(float $value)
     {

@@ -22,7 +22,11 @@ final class CreateTest extends DbWebTestCase
             content: json_encode(LoanTestFixtures::getCreatedContent(), JSON_THROW_ON_ERROR),
         );
 
-        $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(
+            Response::HTTP_OK,
+            $this->client->getResponse()->getStatusCode(),
+            $this->client->getResponse()->getContent(),
+        );
         $this->assertJson($content = $this->client->getResponse()->getContent());
 
         $data = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
@@ -39,7 +43,11 @@ final class CreateTest extends DbWebTestCase
             content: json_encode(LoanTestFixtures::getCreatedContent(), JSON_THROW_ON_ERROR),
         );
 
-        $this->assertSame(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(
+            Response::HTTP_NOT_FOUND,
+            $this->client->getResponse()->getStatusCode(),
+            $this->client->getResponse()->getContent(),
+        );
         $this->assertJson($content = $this->client->getResponse()->getContent());
 
         $data = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
@@ -56,7 +64,11 @@ final class CreateTest extends DbWebTestCase
             content: json_encode([...LoanTestFixtures::getCreatedContent(), ...['name' => '']], JSON_THROW_ON_ERROR),
         );
 
-        $this->assertSame(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(
+            Response::HTTP_BAD_REQUEST,
+            $this->client->getResponse()->getStatusCode(),
+            $this->client->getResponse()->getContent(),
+        );
         $this->assertJson($content = $this->client->getResponse()->getContent());
 
         $data = json_decode($content, true, 512, JSON_THROW_ON_ERROR);

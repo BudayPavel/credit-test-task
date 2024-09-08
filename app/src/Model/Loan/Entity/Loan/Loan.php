@@ -18,32 +18,21 @@ class Loan
     public const TABLE = 'loans';
     public const CLIENT_TABLE = 'clients';
 
-    #[ORM\Column(type: Id::NAME)]
-    #[ORM\Id]
-    private readonly Id $id;
-
-    #[ORM\Column(type: Id::NAME)]
-    private readonly Id $clientId;
-
-    #[ORM\Column(type: Name::NAME)]
-    private readonly Name $name;
-
-    #[ORM\Column(type: Term::NAME)]
-    private readonly Term $term;
-    #[ORM\Column(type: Rate::NAME, precision: 2, scale: 2, nullable: true)]
-    private readonly Rate $interestRate;
-
-    #[ORM\Column(type: Amount::NAME, precision: 10, scale: 2, nullable: true)]
-    private readonly Amount $amount;
-
-    public function __construct(Id $id, Id $clientId, Name $name, Term $term, Rate $interestRate, Amount $amount)
-    {
-        $this->id = $id;
-        $this->clientId = $clientId;
-        $this->name = $name;
-        $this->term = $term;
-        $this->interestRate = $interestRate;
-        $this->amount = $amount;
+    public function __construct(
+        #[ORM\Column(type: Id::NAME)]
+        #[ORM\Id]
+        private readonly Id $id,
+        #[ORM\Column(type: Id::NAME)]
+        private readonly Id $clientId,
+        #[ORM\Column(type: Name::NAME)]
+        private Name $name,
+        #[ORM\Column(type: Term::NAME)]
+        private Term $term,
+        #[ORM\Column(type: Rate::NAME, precision: 4, scale: 2)]
+        private Rate $interestRate,
+        #[ORM\Column(type: Amount::NAME, precision: 10, scale: 2)]
+        private Amount $amount,
+    ) {
     }
 
     public static function create(

@@ -160,6 +160,7 @@ deptrac:
       - Command
       - Handler
       - Query
+      - Validator
       - ValueObject
       - Deserializer
     Repository:
@@ -197,6 +198,7 @@ deptrac:
       - Constraint
       - Fetcher
       - Query
+      - ValueObject
     Fixture:
       - Command
       - Handler
@@ -220,5 +222,6 @@ deptrac:
     FunctionalTest:
       - Fixture
     UnitTest:
+      - Entity
       - Fetcher
       - ValueObject

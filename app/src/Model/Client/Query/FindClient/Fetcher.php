@@ -20,7 +20,7 @@ final readonly class Fetcher
             ->select('*')
             ->from(Client::TABLE)
             ->andWhere('id = :client_id')
-            ->setParameter('client_id', $query->id);
+            ->setParameter('client_id', $query->id->getValue());
 
         /** @var array<string,string> $client */
         $client = $qb->fetchAssociative();
@@ -33,15 +33,15 @@ final readonly class Fetcher
             id: $client['id'],
             firstName: $client['first_name'],
             lastName: $client['last_name'],
-            age: $client['age'],
-            state: $client['state'],
+            age: (int) $client['age'],
+            state: (int) $client['state'],
             city: $client['city'],
             zipCode: $client['zip_code'],
             ssn: $client['ssn'],
-            ficoScore: $client['fico_score'],
+            ficoScore: (int) $client['fico_score'],
             email: $client['email'],
             phone: $client['phone'],
-            monthlyIncome: $client['monthly_income'],
+            monthlyIncome: $client['monthly_income'] ? (float) $client['monthly_income'] : null,
         );
     }
 }

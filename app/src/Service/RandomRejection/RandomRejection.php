@@ -8,6 +8,6 @@ class RandomRejection implements RandomRejectionInterface
 {
     public function rand(): bool
     {
-       return rand(0, 1) === 0;
+        return random_int(0, 1) === 0;
     }
 }

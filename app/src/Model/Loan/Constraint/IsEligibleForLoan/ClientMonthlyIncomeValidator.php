@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Model\Company\Constraint\Exist;
+namespace App\Model\Loan\Constraint\IsEligibleForLoan;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;

@@ -12,10 +12,8 @@ final class Command implements CommandInterface
 {
     public function __construct(
         #[Assert\NotBlank]
-        #[Assert\Uuid]
         public string $id,
         #[Assert\NotBlank]
-        #[Assert\Uuid]
         public string $clientId,
         #[Assert\NotBlank]
         public string $name,

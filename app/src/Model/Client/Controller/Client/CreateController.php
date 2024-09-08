@@ -34,7 +34,7 @@ final readonly class CreateController
                 state: $clientRequest->state,
                 city: $clientRequest->city,
                 zipCode: $clientRequest->zipCode,
-                ssn: $command->ssn,
+                ssn: $clientRequest->ssn,
                 ficoScore: $clientRequest->ficoScore,
                 email: $clientRequest->email,
                 phone: $clientRequest->phone,

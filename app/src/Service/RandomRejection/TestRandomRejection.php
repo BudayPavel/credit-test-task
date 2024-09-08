@@ -8,6 +8,6 @@ class TestRandomRejection implements RandomRejectionInterface
 {
     public function rand(): bool
     {
-       return true;
+        return true;
     }
 }
