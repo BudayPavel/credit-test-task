@@ -1,0 +1,47 @@
+parameters:
+    redis.host: '%env(REDIS_HOST)%'
+    redis.port: '%env(REDIS_PORT)%'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        bind:
+            $entityManager: '@doctrine.orm.default_entity_manager'
+            $connection: '@doctrine.dbal.default_connection'
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Model/Client/Entity/'
+            - '../src/Model/Loan/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+
+    App\Model\Client\Controller\:
+        resource: '../src/Model/Client/Controller'
+        tags: [ 'controller.service_arguments' ]
+
+    App\Model\Loan\Controller\:
+        resource: '../src/Model/Loan/Controller'
+        tags: [ 'controller.service_arguments' ]
+
+    App\Model\Client\Entity\Client\ClientRepository: ~
+    App\Model\Loan\Entity\Loan\LoanRepository: ~
+
+    App\EventListener\FixPostgreSQLDefaultSchemaListener:
+        tags:
+            - { name: doctrine.event_listener, event: postGenerateSchema }
+
+    App\Service\Transaction\TransactionManagerInterface:
+        class: App\Service\Transaction\TransactionManager
+
+    App\Service\RandomRejection\RandomRejectionInterface:
+        class: App\Service\RandomRejection\RandomRejection
+
+    app.query.builder:
+        class: App\Service\QueryBuilder\Doctrine\DoctrineQueryBuilder
+        factory: [ '@App\Service\QueryBuilder\Factory\PostgresDbFactory', 'create' ]
+
+    App\Service\QueryBuilder\QueryBuilderInterface $builder: '@app.query.builder'

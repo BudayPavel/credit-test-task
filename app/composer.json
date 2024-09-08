@@ -1,0 +1,114 @@
+{
+    "type": "project",
+    "license": "proprietary",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.2",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "composer/package-versions-deprecated": "^1.11",
+        "doctrine/annotations": "^2.0",
+        "doctrine/doctrine-bundle": "^2.11",
+        "doctrine/doctrine-migrations-bundle": "^3.3",
+        "doctrine/orm": "^2.17",
+        "fakerphp/faker": "*",
+        "knplabs/knp-paginator-bundle": "*",
+        "phpdocumentor/reflection-docblock": "^5.3",
+        "phpstan/phpdoc-parser": "^1.24",
+        "ramsey/uuid": "^4.7",
+        "stof/doctrine-extensions-bundle": "^1.10",
+        "symfony/amqp-messenger": "7.0.*",
+        "symfony/console": "7.0.*",
+        "symfony/deprecation-contracts": "^2.5",
+        "symfony/doctrine-messenger": "7.0.*",
+        "symfony/dotenv": "7.0.*",
+        "symfony/flex": "^2",
+        "symfony/framework-bundle": "7.0.*",
+        "symfony/messenger": "7.0.*",
+        "symfony/monolog-bundle": "^3.10",
+        "symfony/notifier": "^7.0",
+        "symfony/process": "7.0.*",
+        "symfony/property-access": "7.0.*",
+        "symfony/property-info": "7.0.*",
+        "symfony/proxy-manager-bridge": "6.4.*",
+        "symfony/runtime": "7.0.*",
+        "symfony/security-bundle": "7.0.*",
+        "symfony/serializer": "7.0.*",
+        "symfony/validator": "7.0.*",
+        "symfony/yaml": "7.0.*",
+        "webmozart/assert": "^1.11",
+        "webonyx/graphql-php": "^14.11"
+    },
+    "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.5",
+        "phpunit/php-code-coverage": "^10.1",
+        "phpunit/phpunit": "^10.5",
+        "rector/rector": "^0.16",
+        "squizlabs/php_codesniffer": "^3.8",
+        "symfony/debug-bundle": "7.0.*",
+        "symfony/phpunit-bridge": "^7.0",
+        "symfony/stopwatch": "7.0.*",
+        "symfony/web-profiler-bundle": "7.0.*",
+        "vimeo/psalm": "5.16",
+        "weirdan/doctrine-psalm-plugin": "^2.9"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "symfony/flex": true,
+            "symfony/runtime": true
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
+    },
+    "replace": {
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php72": "*",
+        "symfony/polyfill-php73": "*",
+        "symfony/polyfill-php74": "*",
+        "symfony/polyfill-php80": "*"
+    },
+    "scripts": {
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "psalm": "psalm",
+        "test": "phpunit --colors=always",
+        "test-fail": "phpunit --colors=always --stop-on-failure",
+        "cache:clear --no-warmup": "symfony-cmd",
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        },
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ]
+    },
+    "conflict": {
+        "symfony/symfony": "*"
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": true,
+            "require": "7.0.*",
+            "docker": false
+        }
+    }
+}

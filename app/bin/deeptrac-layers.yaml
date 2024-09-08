@@ -1,0 +1,224 @@
+deptrac:
+  paths:
+    - ../src
+  exclude_files:
+    - .*test.*
+  layers:
+    - name: Controller
+      collectors:
+        - type: className
+          regex: .*Controller.*
+
+    - name: Entity
+      collectors:
+        - type: bool
+          must:
+            - type: directory
+              regex: .*Entity.*
+          must_not:
+            - type: className
+              regex: .*Repository.*
+            - type: directory
+              regex: .*VO.*
+            - type: directory
+              regex: .*Exception.*
+
+    - name: ValueObject
+      collectors:
+        - type: bool
+          must:
+            - type: directory
+              regex: .*Entity/VO.*
+
+    - name: Repository
+      collectors:
+        - type: bool
+          must:
+            - type: className
+              regex: .*Repository.*
+          must_not:
+            - type: className
+              regex: .*ObjectRepository.*
+
+    - name: Console
+      collectors:
+        - type: extends
+          extends: Symfony\Component\Console\Command\Command
+
+    - name: Command
+      collectors:
+        - type: implements
+          implements: App\Service\CommandHandler\CommandInterface
+
+    - name: Handler
+      collectors:
+        - type: implements
+          implements: App\Service\CommandHandler\CommandHandlerInterface
+
+    - name: Flusher
+      collectors:
+        - type: bool
+          must:
+            - type: className
+              regex: .*Flusher.*
+          must_not:
+            - type: implements
+              implements: App\Service\Flusher\AggregateRootInterface
+
+    - name: Constraint
+      collectors:
+        - type: extends
+          extends: Symfony\Component\Validator\Constraint
+
+    - name: ConstraintValidator
+      collectors:
+        - type: extends
+          extends: Symfony\Component\Validator\ConstraintValidator
+
+    - name: Fixture
+      collectors:
+        - type: extends
+          extends: Doctrine\Bundle\FixturesBundle\Fixture
+
+    - name: Query
+      collectors:
+        - type: implements
+          implements: App\Service\CommandHandler\QueryInterface
+
+    - name: Fetcher
+      collectors:
+        - type: bool
+          must:
+            - type: className
+              regex: .*Fetcher.*
+
+    - name: Deserializer
+      collectors:
+        - type: bool
+          must:
+            - type: className
+              regex: .*Deserializer.*
+
+    - name: EntityManager
+      collectors:
+        - type: bool
+          must:
+            - type: className
+              regex: .*EntityManager.*
+
+    - name: QueryBuilder
+      collectors:
+        - type: bool
+          must:
+            - type: className
+              regex: .*QueryBuilder.*
+
+    - name: ObjectManager
+      collectors:
+        - type: bool
+          must:
+            - type: className
+              regex: .*ObjectManager.*
+
+    - name: Validator
+      collectors:
+        - type: bool
+          must:
+            - type: directory
+              regex: app/src/Service/Validator*
+
+    - name: FunctionalTest
+      collectors:
+        - type: extends
+          extends: App\Tests\DbWebTestCase
+
+    - name: UnitTest
+      collectors:
+        - type: extends
+          extends: PHPUnit\Framework\TestCase
+
+    - name: Serializer
+      collectors:
+        - type: bool
+          must:
+            - type: className
+              regex: .*SerializerInterface.*
+          must_not:
+            - type: className
+              regex: .*Deserializer.*
+
+    - name: ObjectNormalizer
+      collectors:
+        - type: bool
+          must:
+            - type: className
+              regex: .*ObjectNormalizer.*
+
+  ruleset:
+    Controller:
+      - Fetcher
+      - Command
+      - Handler
+      - Query
+      - ValueObject
+      - Deserializer
+    Repository:
+      - Entity
+      - ValueObject
+      - EntityManager
+    Console:
+      - Command
+      - Handler
+      - Fetcher
+      - Query
+      - ValueObject
+    Command:
+      - Constraint
+      - ValueObject
+    Handler:
+      - Repository
+      - Command
+      - Entity
+      - Flusher
+      - ValueObject
+      - Validator
+      - Fetcher
+      - Query
+      - ObjectNormalizer
+    Fetcher:
+      - Command
+      - Query
+      - Entity
+      - ValueObject
+      - QueryBuilder
+      - Deserializer
+    Constraint:
+    ConstraintValidator:
+      - Constraint
+      - Fetcher
+      - Query
+    Fixture:
+      - Command
+      - Handler
+      - ValueObject
+      - ObjectManager
+      - Entity
+    Flusher:
+      - EntityManager
+    Entity:
+      - ValueObject
+    ValueObject:
+    Query:
+      - ValueObject
+    EntityManager:
+    Serializer:
+      - ObjectNormalizer
+    Deserializer:
+      - Serializer
+      - ObjectNormalizer
+    Validator:
+    FunctionalTest:
+      - Fixture
+    UnitTest:
+      - Fetcher
+      - ValueObject

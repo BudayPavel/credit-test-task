@@ -1,0 +1,56 @@
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                url: '%env(resolve:DATABASE_URL)%'
+                server_version: '13'
+        types:
+            #Client
+            client_age: 'App\Model\Client\Entity\VO\AgeType'
+            client_city: 'App\Model\Client\Entity\VO\CityType'
+            client_email: 'App\Model\Client\Entity\VO\EmailType'
+            client_fico_score: 'App\Model\Client\Entity\VO\FicoScoreType'
+            client_uuid: 'App\Model\Client\Entity\VO\IdType'
+            client_name: 'App\Model\Client\Entity\VO\NameType'
+            client_number: 'App\Model\Client\Entity\VO\NumberType'
+            client_phone: 'App\Model\Client\Entity\VO\PhoneType'
+            client_quantity: 'App\Model\Client\Entity\VO\QuantityType'
+            client_state: 'App\Model\Client\Entity\VO\StateType'
+            client_zip_code: 'App\Model\Client\Entity\VO\ZipCodeType'
+
+            #Loan
+            loan_amount: 'App\Model\Loan\Entity\VO\AmountType'
+            loan_uuid: 'App\Model\Loan\Entity\VO\IdType'
+            loan_name: 'App\Model\Loan\Entity\VO\NameType'
+            loan_rate: 'App\Model\Loan\Entity\VO\RateType'
+            loan_term: 'App\Model\Loan\Entity\VO\TermType'
+    orm:
+        auto_generate_proxy_classes: true
+        proxy_dir: "%kernel.cache_dir%/var/cache/doctrine/proxy"
+        default_entity_manager: default
+        entity_managers:
+            default:
+                connection: default
+                naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+                auto_mapping: true
+                mappings:
+                    Client:
+                        is_bundle: false
+                        type: attribute
+                        dir: '%kernel.project_dir%/src/Model/Client/Entity'
+                        prefix: 'App\Model\Client\Entity'
+                        alias: Client
+
+                    Loan:
+                        is_bundle: false
+                        type: attribute
+                        dir: '%kernel.project_dir%/src/Model/Loan/Entity'
+                        prefix: 'App\Model\Loan\Entity'
+                        alias: Loan
+
+                    tree:
+                        type: attribute
+                        alias: Gedmo
+                        prefix: Gedmo\Tree\Entity
+                        dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/src/Tree/Entity"

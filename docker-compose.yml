@@ -1,0 +1,58 @@
+version: "3"
+services:
+    credit-test-nginx:
+        build:
+            context: app/.deploy/dev/nginx
+        container_name: credit-test-nginx
+        volumes:
+            - "$PWD/app:/app:rw"
+        environment:
+            VIRTUAL_HOST: "credit"
+            PHP_IDE_CONFIG: "serverName=Docker"
+        depends_on:
+            - credit-test-php-fpm
+        ports:
+            - 8091:80
+        networks:
+            - credit-test-network
+    credit-test-php-fpm:
+        build:
+            context: app/.deploy/dev/php/fpm
+        container_name: credit-test-php-fpm
+        volumes:
+            - "$PWD/app:/app:rw"
+        environment:
+            XDEBUG_CONFIG: "remote_host=192.168.221.1 remote_enable=1"
+            PHP_IDE_CONFIG: "serverName=Docker"
+        networks:
+            - credit-test-network
+    credit-test-php-cli:
+        build:
+            context: app/.deploy/dev/php/cli
+        container_name: credit-test-php-cli
+        volumes:
+            - "$PWD/app:/app:rw"
+            - "$PWD/.data/composer:/root/.composer/cache"
+        environment:
+            XDEBUG_CONFIG: "remote_host=192.168.221.1 remote_enable=1"
+            PHP_IDE_CONFIG: "serverName=Docker"
+        depends_on:
+            - credit-test-postgres
+        networks:
+            - credit-test-network
+    credit-test-postgres:
+        image: postgres:13.3-alpine
+        environment:
+            POSTGRES_USER: user
+            POSTGRES_PASSWORD: password
+            POSTGRES_DB: db
+        volumes:
+            - "$PWD/.data/db/postgres:/var/lib/postgresql/data"
+        ports:
+            - "54321:5432"
+        networks:
+            - credit-test-network
+
+networks:
+    credit-test-network:
+        external: true

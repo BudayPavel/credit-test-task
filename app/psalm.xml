@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<psalm
+        errorLevel="1"
+        ignoreInternalFunctionFalseReturn="false"
+        ignoreInternalFunctionNullReturn="false"
+        ensureArrayIntOffsetsExist="true"
+        allowStringToStandInForClass="true"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://getpsalm.org/schema/config"
+        xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="src" useStrictTypes="true"/>
+        <ignoreFiles>
+            <directory name="tests"/>
+            <directory name="var"/>
+            <directory name="vendor"/>
+            <directory name="src/Model/Client/Test"/>
+            <directory name="src/Model/Loan/Test"/>
+            <directory name="src/Service"/>
+            <directory name="src/Service/Flusher"/>
+            <file name="src/Kernel.php"/>
+            <file name="src/EventListener/FixPostgreSQLDefaultSchemaListener.php"/>
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <PropertyNotSetInConstructor>
+            <errorLevel type="suppress">
+                <directory name="src/Model/Client/Test"/>
+                <directory name="src/Model/Loan/Test"/>
+                <directory name="src/Model/Loan/Constraint"/>
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+    </issueHandlers>
+<plugins><pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin"/></plugins></psalm>

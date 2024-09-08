@@ -1,0 +1,22 @@
+paths:
+  - ../src
+exclude_files:
+  - .*test.*
+layers:
+  - name: Client
+    collectors:
+      - type: bool
+        must:
+          - type: directory
+            regex: /app/src/Model/Client/*.*
+
+  - name: Loan
+    collectors:
+      - type: bool
+        must:
+          - type: directory
+            regex: /app/src/Model/Loan/*.*
+
+ruleset:
+  Client:
+  Loan:
