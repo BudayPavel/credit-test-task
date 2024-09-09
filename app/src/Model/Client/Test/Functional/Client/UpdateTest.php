@@ -36,7 +36,7 @@ final class UpdateTest extends DbWebTestCase
         self::assertArrayHasKey('id', $data);
 
         $this->client->request(
-            method: Request::METHOD_PUT,
+            method: Request::METHOD_GET,
             uri: sprintf('/client/%s', ClientTestFixtures::TEST_UUID),
         );
 
