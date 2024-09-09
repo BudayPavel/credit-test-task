@@ -50,7 +50,7 @@ final class ClientTestFixtures extends Fixture implements FixtureGroupInterface
             state: State::CA->value,
             city: $this->factory->city,
             zipCode: $this->factory->postcode,
-            ssn: (string) $this->factory->randomNumber(),
+            ssn: self::TEST_SSN,
             ficoScore: $this->factory->numberBetween(FicoScore::MIN, FicoScore::MAX),
             email: $this->factory->email,
             phone: $this->factory->phoneNumber,
