@@ -6,6 +6,7 @@ namespace App\Model\Client\Test\Functional\Client;
 
 use App\Model\Client\Test\Functional\DataFixtures\ClientTestFixtures;
 use App\Tests\DbWebTestCase;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -16,7 +17,7 @@ final class ListTest extends DbWebTestCase
     public function testListClient(): void
     {
         $this->client->request(
-            method: 'GET',
+            method: Request::METHOD_GET,
             uri: '/client/list',
             parameters: [
                 'page' => ClientTestFixtures::TEST_PROJECT_LIST_NUM_PAGE,
