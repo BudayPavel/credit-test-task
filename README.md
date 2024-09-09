@@ -43,12 +43,3 @@ vendor/bin/rector process src --dry-run
 ### Unit and functional tests ###
 
 Run bin/console do:fixtures:load -n to load fixtures and vendor/bin/codecept run
-
-### GraphiQL ###
-
-The easiest way to use it is to install one of the existing Google Chrome extensions:
-
-* [ChromeiQL](https://chrome.google.com/webstore/detail/chromeiql/fkkiamalmpiidkljmicmjfbieiclmeij)
-* [GraphiQL Feen](https://chrome.google.com/webstore/detail/graphiql-feen/mcbfdonlkfpbfdpimkjilhdneikhfklp)
-
-Alternatively, you can follow instructions on the GraphiQL page and [install it locally](https://github.com/graphql/graphiql).
