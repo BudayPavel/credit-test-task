@@ -22,11 +22,11 @@ final readonly class CheckClientController
     ) {
     }
 
-    public function __invoke(string $programId, string $clientId): JsonResponse
+    public function __invoke(string $clientId): JsonResponse
     {
         $command = $this->fetcher->getClient(new Query(new Id($clientId)));
         $this->validator->validate($command);
 
-        return $this->response->createResponse($clientId);
+        return $this->response->jsonResponse(['id' => $clientId]);
     }
 }

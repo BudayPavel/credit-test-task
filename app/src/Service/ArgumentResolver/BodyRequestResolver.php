@@ -5,15 +5,17 @@ declare(strict_types=1);
 namespace App\Service\ArgumentResolver;
 
 use App\Service\Request\BodyRequestInterface;
+use App\Service\Validator\ValidationInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
-use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
-use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 final readonly class BodyRequestResolver implements ValueResolverInterface
 {
-    public function __construct(private DenormalizerInterface $denormalizer)
+    public const TYPE = 'json';
+
+    public function __construct(private SerializerInterface $serializer, private ValidationInterface $validator)
     {
     }
 
@@ -26,12 +28,13 @@ final readonly class BodyRequestResolver implements ValueResolverInterface
         }
 
         /** @var object $object */
-        $object = $this->denormalizer->denormalize(
+        $object = $this->serializer->deserialize(
             $request->getContent(),
             $type,
-            null,
-            [AbstractObjectNormalizer::DISABLE_TYPE_ENFORCEMENT => true],
+            self::TYPE,
         );
+
+        $this->validator->validate($object);
 
         return [$object];
     }

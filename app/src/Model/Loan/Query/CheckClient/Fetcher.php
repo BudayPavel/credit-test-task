@@ -18,7 +18,7 @@ final readonly class Fetcher
     public function getClient(Query $query): Command
     {
         $qb = $this->builder->createQueryBuilder()
-            ->select('age, state, fico_score, monthly_income')
+            ->select('email, phone, age, address_state, fico_score, monthly_income')
             ->from(Loan::CLIENT_TABLE)
             ->andWhere('id = :client_id')
             ->setParameter('client_id', $query->clientId->getValue());
@@ -34,7 +34,7 @@ final readonly class Fetcher
             email: $client['email'],
             phone: $client['phone'],
             age: (int) $client['age'],
-            state: (int) $client['state'],
+            state: (int) $client['address_state'],
             ficoScore: (int) $client['fico_score'],
             monthlyIncome: $client['monthly_income'] ? (float) $client['monthly_income'] : null,
         );

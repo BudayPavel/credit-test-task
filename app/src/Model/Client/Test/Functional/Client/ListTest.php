@@ -15,8 +15,7 @@ final class ListTest extends DbWebTestCase
 {
     public function testListClient(): void
     {
-        $client = static::createClient();
-        $client->request(
+        $this->client->request(
             method: 'GET',
             uri: '/client/list',
             parameters: [
@@ -27,10 +26,10 @@ final class ListTest extends DbWebTestCase
 
         $this->assertSame(
             Response::HTTP_OK,
-            $client->getResponse()->getStatusCode(),
-            $client->getResponse()->getContent(),
+            $this->client->getResponse()->getStatusCode(),
+            $this->client->getResponse()->getContent(),
         );
-        $this->assertJson($content = $client->getResponse()->getContent());
+        $this->assertJson($content = $this->client->getResponse()->getContent());
 
         $data = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
 

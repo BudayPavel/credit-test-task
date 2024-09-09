@@ -14,10 +14,8 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 final readonly class QueryRequestResolver implements ValueResolverInterface
 {
-    public function __construct(
-        private DenormalizerInterface $denormalizer,
-        private ValidationInterface $validator,
-    ) {
+    public function __construct(private DenormalizerInterface $denormalizer, private ValidationInterface $validator)
+    {
     }
 
     public function resolve(Request $request, ArgumentMetadata $argument): array

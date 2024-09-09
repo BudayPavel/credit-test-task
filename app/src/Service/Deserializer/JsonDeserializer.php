@@ -6,11 +6,13 @@ namespace App\Service\Deserializer;
 
 use App\Service\CommandHandler\CommandInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
-use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
-final readonly class JsonDeserializer implements JsonDeserializerInterface
+final class JsonDeserializer implements JsonDeserializerInterface
 {
-    public function __construct(private DenormalizerInterface $denormalizer)
+    public const TYPE = 'json';
+
+    public function __construct(private readonly SerializerInterface $serializer)
     {
     }
 
@@ -21,10 +23,10 @@ final readonly class JsonDeserializer implements JsonDeserializerInterface
         array $ignoredAttributes = ['id'],
     ): CommandInterface {
         /** @var CommandInterface */
-        return $this->denormalizer->denormalize(
+        return $this->serializer->deserialize(
             $data,
             $command::class,
-            null,
+            self::TYPE,
             [
                 'object_to_populate' => $command,
                 'ignored_attributes' => $ignoredAttributes,

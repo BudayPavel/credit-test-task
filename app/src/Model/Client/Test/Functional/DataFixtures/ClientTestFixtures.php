@@ -27,7 +27,7 @@ final class ClientTestFixtures extends Fixture implements FixtureGroupInterface
     public const TEST_CITY = 'Test city';
     public const TEST_ZIP_CODE = '2200112';
     public const TEST_PHONE = '+1 222 334 33 44';
-    public const TEST_FICO_SCORE = 400;
+    public const TEST_FICO_SCORE = 600;
     public const TEST_SSN = 'TEST123';
     public const TEST_MONTHLY_INCOME = 1000;
     public const TEST_PROJECT_LIST_NUM_PAGE = 1;
@@ -42,7 +42,7 @@ final class ClientTestFixtures extends Fixture implements FixtureGroupInterface
 
     public function load(ObjectManager $manager): void
     {
-        $this->handler->handle(new Command(
+        $command = new Command(
             id: self::TEST_UUID,
             firstName: $this->factory->firstName,
             lastName: $this->factory->lastName,
@@ -51,10 +51,13 @@ final class ClientTestFixtures extends Fixture implements FixtureGroupInterface
             city: $this->factory->city,
             zipCode: $this->factory->postcode,
             ssn: self::TEST_SSN,
-            ficoScore: $this->factory->numberBetween(FicoScore::MIN, FicoScore::MAX),
+            ficoScore: self::TEST_FICO_SCORE,
             email: $this->factory->email,
             phone: $this->factory->phoneNumber,
-        ));
+        );
+
+        $command->monthlyIncome = self::TEST_MONTHLY_INCOME;
+        $this->handler->handle($command);
     }
 
     public static function getCreatedContent(): array

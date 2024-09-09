@@ -15,9 +15,8 @@ final class UpdateTest extends DbWebTestCase
 {
     public function testUpdateClient(): void
     {
-        $client = static::createClient();
         $updatedContent = ClientTestFixtures::getUpdatedContent();
-        $client->request(
+        $this->client->request(
             method: 'PUT',
             uri: sprintf('/client/%s/update', ClientTestFixtures::TEST_UUID),
             server: ['CONTENT_TYPE' => 'application/json'],
@@ -26,26 +25,26 @@ final class UpdateTest extends DbWebTestCase
 
         $this->assertSame(
             Response::HTTP_OK,
-            $client->getResponse()->getStatusCode(),
-            $client->getResponse()->getContent(),
+            $this->client->getResponse()->getStatusCode(),
+            $this->client->getResponse()->getContent(),
         );
-        $this->assertJson($content = $client->getResponse()->getContent());
+        $this->assertJson($content = $this->client->getResponse()->getContent());
 
         $data = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
 
         self::assertArrayHasKey('id', $data);
 
-        $client->request(
+        $this->client->request(
             method: 'GET',
             uri: sprintf('/client/%s', ClientTestFixtures::TEST_UUID),
         );
 
         $this->assertSame(
             Response::HTTP_OK,
-            $client->getResponse()->getStatusCode(),
-            $client->getResponse()->getContent(),
+            $this->client->getResponse()->getStatusCode(),
+            $this->client->getResponse()->getContent(),
         );
-        $this->assertJson($content = $client->getResponse()->getContent());
+        $this->assertJson($content = $this->client->getResponse()->getContent());
 
         $data = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
 
@@ -56,8 +55,7 @@ final class UpdateTest extends DbWebTestCase
 
     public function testUpdateNotFoundClient(): void
     {
-        $client = static::createClient();
-        $client->request(
+        $this->client->request(
             method: 'PUT',
             uri: sprintf('/client/%s/update', ClientTestFixtures::TEST_NOT_FOUND_UUID),
             server: ['CONTENT_TYPE' => 'application/json'],
@@ -66,10 +64,10 @@ final class UpdateTest extends DbWebTestCase
 
         $this->assertSame(
             Response::HTTP_NOT_FOUND,
-            $client->getResponse()->getStatusCode(),
-            $client->getResponse()->getContent(),
+            $this->client->getResponse()->getStatusCode(),
+            $this->client->getResponse()->getContent(),
         );
-        $this->assertJson($content = $client->getResponse()->getContent());
+        $this->assertJson($content = $this->client->getResponse()->getContent());
 
         $data = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
 

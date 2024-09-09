@@ -15,18 +15,17 @@ final class CheckClientTest extends DbWebTestCase
 {
     public function testShowClient(): void
     {
-        $client = static::createClient();
-        $client->request(
+        $this->client->request(
             method: 'GET',
             uri: sprintf('/loan/client/%s/check', LoanTestFixtures::TEST_CLIENT_UUID),
         );
 
         $this->assertSame(
             Response::HTTP_OK,
-            $client->getResponse()->getStatusCode(),
-            $client->getResponse()->getContent(),
+            $this->client->getResponse()->getStatusCode(),
+            $this->client->getResponse()->getContent(),
         );
-        $this->assertJson($content = $client->getResponse()->getContent());
+        $this->assertJson($content = $this->client->getResponse()->getContent());
 
         $data = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
 
@@ -35,18 +34,17 @@ final class CheckClientTest extends DbWebTestCase
 
     public function testShowNotFoundClient(): void
     {
-        $client = static::createClient();
-        $client->request(
+        $this->client->request(
             method: 'GET',
             uri: sprintf('/loan/client/%s/check', LoanTestFixtures::TEST_NOT_FOUND_UUID),
         );
 
         $this->assertSame(
             Response::HTTP_NOT_FOUND,
-            $client->getResponse()->getStatusCode(),
-            $client->getResponse()->getContent(),
+            $this->client->getResponse()->getStatusCode(),
+            $this->client->getResponse()->getContent(),
         );
-        $this->assertJson($content = $client->getResponse()->getContent());
+        $this->assertJson($content = $this->client->getResponse()->getContent());
 
         $data = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
 

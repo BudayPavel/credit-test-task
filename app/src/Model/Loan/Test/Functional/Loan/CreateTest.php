@@ -15,8 +15,7 @@ final class CreateTest extends DbWebTestCase
 {
     public function testCreateLoan(): void
     {
-        $client = static::createClient();
-        $client->request(
+        $this->client->request(
             method: 'POST',
             uri: '/loan/create',
             server: ['CONTENT_TYPE' => 'application/json'],
@@ -24,11 +23,11 @@ final class CreateTest extends DbWebTestCase
         );
 
         $this->assertSame(
-            Response::HTTP_OK,
-            $client->getResponse()->getStatusCode(),
-            $client->getResponse()->getContent(),
+            Response::HTTP_CREATED,
+            $this->client->getResponse()->getStatusCode(),
+            $this->client->getResponse()->getContent(),
         );
-        $this->assertJson($content = $client->getResponse()->getContent());
+        $this->assertJson($content = $this->client->getResponse()->getContent());
 
         $data = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
 
@@ -37,8 +36,7 @@ final class CreateTest extends DbWebTestCase
 
     public function testErrorCreateLoanIncorrectUrl(): void
     {
-        $client = static::createClient();
-        $client->request(
+        $this->client->request(
             method: 'POST',
             uri: '/loan/create/',
             server: ['CONTENT_TYPE' => 'application/json'],
@@ -46,11 +44,11 @@ final class CreateTest extends DbWebTestCase
         );
 
         $this->assertSame(
-            Response::HTTP_NOT_FOUND,
-            $client->getResponse()->getStatusCode(),
-            $client->getResponse()->getContent(),
+            Response::HTTP_BAD_REQUEST,
+            $this->client->getResponse()->getStatusCode(),
+            $this->client->getResponse()->getContent(),
         );
-        $this->assertJson($content = $client->getResponse()->getContent());
+        $this->assertJson($content = $this->client->getResponse()->getContent());
 
         $data = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
 
@@ -59,8 +57,7 @@ final class CreateTest extends DbWebTestCase
 
     public function testErrorCreateLoanBadContent(): void
     {
-        $client = static::createClient();
-        $client->request(
+        $this->client->request(
             method: 'POST',
             uri: '/loan/create',
             server: ['CONTENT_TYPE' => 'application/json'],
@@ -69,10 +66,10 @@ final class CreateTest extends DbWebTestCase
 
         $this->assertSame(
             Response::HTTP_BAD_REQUEST,
-            $client->getResponse()->getStatusCode(),
-            $client->getResponse()->getContent(),
+            $this->client->getResponse()->getStatusCode(),
+            $this->client->getResponse()->getContent(),
         );
-        $this->assertJson($content = $client->getResponse()->getContent());
+        $this->assertJson($content = $this->client->getResponse()->getContent());
 
         $data = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
 

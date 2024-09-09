@@ -18,7 +18,7 @@ final readonly class ShowController
     {
     }
 
-    public function __invoke(string $programId, string $id): JsonResponse
+    public function __invoke(string $id): JsonResponse
     {
         $company = $this->fetcher->getClient(new Query(new Id($id)));
 
