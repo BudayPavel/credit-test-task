@@ -6,6 +6,7 @@ namespace App\Model\Client\Test\Functional\Client;
 
 use App\Model\Client\Test\Functional\DataFixtures\ClientTestFixtures;
 use App\Tests\DbWebTestCase;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -16,7 +17,7 @@ final class ShowTest extends DbWebTestCase
     public function testShowClient(): void
     {
         $this->client->request(
-            method: 'GET',
+            method: Request::METHOD_GET,
             uri: sprintf('/client/%s', ClientTestFixtures::TEST_UUID),
         );
 
@@ -35,7 +36,7 @@ final class ShowTest extends DbWebTestCase
     public function testShowNotFoundClient(): void
     {
         $this->client->request(
-            method: 'GET',
+            method: Request::METHOD_GET,
             uri: sprintf('/client/%s', ClientTestFixtures::TEST_NOT_FOUND_UUID),
         );
 

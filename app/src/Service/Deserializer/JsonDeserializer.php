@@ -8,11 +8,11 @@ use App\Service\CommandHandler\CommandInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
-final class JsonDeserializer implements JsonDeserializerInterface
+final readonly class JsonDeserializer implements JsonDeserializerInterface
 {
     public const TYPE = 'json';
 
-    public function __construct(private readonly SerializerInterface $serializer)
+    public function __construct(private SerializerInterface $serializer)
     {
     }
 

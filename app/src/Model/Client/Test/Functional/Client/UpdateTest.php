@@ -6,6 +6,7 @@ namespace App\Model\Client\Test\Functional\Client;
 
 use App\Model\Client\Test\Functional\DataFixtures\ClientTestFixtures;
 use App\Tests\DbWebTestCase;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -17,7 +18,7 @@ final class UpdateTest extends DbWebTestCase
     {
         $updatedContent = ClientTestFixtures::getUpdatedContent();
         $this->client->request(
-            method: 'PUT',
+            method: Request::METHOD_PUT,
             uri: sprintf('/client/%s/update', ClientTestFixtures::TEST_UUID),
             server: ['CONTENT_TYPE' => 'application/json'],
             content: json_encode($updatedContent, JSON_THROW_ON_ERROR),
@@ -35,7 +36,7 @@ final class UpdateTest extends DbWebTestCase
         self::assertArrayHasKey('id', $data);
 
         $this->client->request(
-            method: 'GET',
+            method: Request::METHOD_PUT,
             uri: sprintf('/client/%s', ClientTestFixtures::TEST_UUID),
         );
 
@@ -56,7 +57,7 @@ final class UpdateTest extends DbWebTestCase
     public function testUpdateNotFoundClient(): void
     {
         $this->client->request(
-            method: 'PUT',
+            method: Request::METHOD_PUT,
             uri: sprintf('/client/%s/update', ClientTestFixtures::TEST_NOT_FOUND_UUID),
             server: ['CONTENT_TYPE' => 'application/json'],
             content: json_encode(ClientTestFixtures::getUpdatedContent(), JSON_THROW_ON_ERROR),

@@ -6,6 +6,7 @@ namespace App\Model\Client\Test\Functional\Client;
 
 use App\Model\Client\Test\Functional\DataFixtures\ClientTestFixtures;
 use App\Tests\DbWebTestCase;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -16,7 +17,7 @@ final class CreateTest extends DbWebTestCase
     public function testCreateClient(): void
     {
         $this->client->request(
-            method: 'POST',
+            method: Request::METHOD_POST,
             uri: '/client/create',
             server: ['CONTENT_TYPE' => 'application/json'],
             content: json_encode(ClientTestFixtures::getCreatedContent(), JSON_THROW_ON_ERROR),
@@ -37,7 +38,7 @@ final class CreateTest extends DbWebTestCase
     public function testErrorCreateClientIncorrectUrl(): void
     {
         $this->client->request(
-            method: 'POST',
+            method: Request::METHOD_POST,
             uri: '/client/create/',
             server: ['CONTENT_TYPE' => 'application/json'],
             content: json_encode(ClientTestFixtures::getCreatedContent(), JSON_THROW_ON_ERROR),
@@ -59,7 +60,7 @@ final class CreateTest extends DbWebTestCase
     public function testErrorCreateClientBadContent(): void
     {
         $this->client->request(
-            method: 'POST',
+            method: Request::METHOD_POST,
             uri: '/client/create',
             server: ['CONTENT_TYPE' => 'application/json'],
             content: json_encode(

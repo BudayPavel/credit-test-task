@@ -12,7 +12,6 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class InvalidArgumentExceptionSubscriber implements EventSubscriberInterface
 {
-
     public static function getSubscribedEvents(): array
     {
         return [

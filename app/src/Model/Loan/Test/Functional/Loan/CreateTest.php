@@ -6,6 +6,7 @@ namespace App\Model\Loan\Test\Functional\Loan;
 
 use App\Model\Loan\Test\Functional\DataFixtures\LoanTestFixtures;
 use App\Tests\DbWebTestCase;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -16,7 +17,7 @@ final class CreateTest extends DbWebTestCase
     public function testCreateLoan(): void
     {
         $this->client->request(
-            method: 'POST',
+            method: Request::METHOD_POST,
             uri: '/loan/create',
             server: ['CONTENT_TYPE' => 'application/json'],
             content: json_encode(LoanTestFixtures::getCreatedContent(), JSON_THROW_ON_ERROR),
@@ -37,7 +38,7 @@ final class CreateTest extends DbWebTestCase
     public function testErrorCreateLoanIncorrectUrl(): void
     {
         $this->client->request(
-            method: 'POST',
+            method: Request::METHOD_POST,
             uri: '/loan/create/',
             server: ['CONTENT_TYPE' => 'application/json'],
             content: json_encode(LoanTestFixtures::getCreatedContent(), JSON_THROW_ON_ERROR),
@@ -58,7 +59,7 @@ final class CreateTest extends DbWebTestCase
     public function testErrorCreateLoanBadContent(): void
     {
         $this->client->request(
-            method: 'POST',
+            method: Request::METHOD_POST,
             uri: '/loan/create',
             server: ['CONTENT_TYPE' => 'application/json'],
             content: json_encode([...LoanTestFixtures::getCreatedContent(), ...['name' => '']], JSON_THROW_ON_ERROR),

@@ -6,6 +6,7 @@ namespace App\Model\Loan\Test\Functional\Loan;
 
 use App\Model\Loan\Test\Functional\DataFixtures\LoanTestFixtures;
 use App\Tests\DbWebTestCase;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -16,7 +17,7 @@ final class CheckClientTest extends DbWebTestCase
     public function testShowClient(): void
     {
         $this->client->request(
-            method: 'GET',
+            method: Request::METHOD_GET,
             uri: sprintf('/loan/client/%s/check', LoanTestFixtures::TEST_CLIENT_UUID),
         );
 
@@ -35,7 +36,7 @@ final class CheckClientTest extends DbWebTestCase
     public function testShowNotFoundClient(): void
     {
         $this->client->request(
-            method: 'GET',
+            method: Request::METHOD_GET,
             uri: sprintf('/loan/client/%s/check', LoanTestFixtures::TEST_NOT_FOUND_UUID),
         );
 
