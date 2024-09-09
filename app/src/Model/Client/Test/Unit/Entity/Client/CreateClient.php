@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Model\Client\Test\Unit\Entity\User;
+namespace App\Model\Client\Test\Unit\Entity\Client;
 
 use App\Model\Client\Entity\Client\Client;
 use App\Model\Client\Test\Unit\Builder\ClientBuilder;

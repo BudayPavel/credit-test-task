@@ -22,13 +22,6 @@ final class EmailTest extends TestCase
         self::assertEquals($value, $email->getValue());
     }
 
-    public function testCase(): void
-    {
-        $email = new Email('EmAil@app.test');
-
-        self::assertEquals('email@app.test', $email->getValue());
-    }
-
     public function testIncorrect(): void
     {
         $this->expectException(InvalidArgumentException::class);

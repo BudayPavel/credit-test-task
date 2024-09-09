@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Model\Loan\Test\Functional\Client;
+namespace App\Model\Loan\Test\Functional\Loan;
 
 use App\Model\Loan\Test\Functional\DataFixtures\LoanTestFixtures;
 use App\Tests\DbWebTestCase;
