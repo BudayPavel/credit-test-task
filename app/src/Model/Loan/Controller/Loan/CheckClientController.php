@@ -27,6 +27,6 @@ final readonly class CheckClientController
         $command = $this->fetcher->getClient(new Query(new Id($clientId)));
         $this->validator->validate($command);
 
-        return $this->response->emptyResponse();
+        return $this->response->createResponse($clientId);
     }
 }

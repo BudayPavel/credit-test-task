@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace App\Model\Client\Test\Functional\Client;
+namespace App\Model\Loan\Test\Functional\Loan;
 
-use App\Model\Client\Test\Functional\DataFixtures\ClientTestFixtures;
+use App\Model\Loan\Test\Functional\DataFixtures\LoanTestFixtures;
 use App\Tests\DbWebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @covers \App\Model\Client\Controller\Client\ShowController::__invoke
  */
-final class ShowTest extends DbWebTestCase
+final class CheckClientTest extends DbWebTestCase
 {
     public function testShowClient(): void
     {
         $client = static::createClient();
         $client->request(
             method: 'GET',
-            uri: sprintf('/client/%s', ClientTestFixtures::TEST_UUID),
+            uri: sprintf('/loan/client/%s/check', LoanTestFixtures::TEST_CLIENT_UUID),
         );
 
         $this->assertSame(
@@ -38,7 +38,7 @@ final class ShowTest extends DbWebTestCase
         $client = static::createClient();
         $client->request(
             method: 'GET',
-            uri: sprintf('/client/%s', ClientTestFixtures::TEST_NOT_FOUND_UUID),
+            uri: sprintf('/loan/client/%s/check', LoanTestFixtures::TEST_NOT_FOUND_UUID),
         );
 
         $this->assertSame(

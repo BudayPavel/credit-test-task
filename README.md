@@ -21,19 +21,6 @@ Connect to local database **credit-test-postgres** is:
 * password: password
 * database: db
 
-Connect to "old" local database **credit-test-mysql** is:
-* hostname: localhost
-* port: 33081
-* username: user
-* password: password
-* database: db
-
-#####Rabbit mq connection:
-
-* web-panel: 127.0.0.1:8063
-* username: rabbit
-* password: rabbit
-
 ### Check code-style and static analyze ###
 
 make ckeck
