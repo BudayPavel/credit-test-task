@@ -10,7 +10,14 @@ This article describe installation of web application using docker.
 1. Install [Git](https://git-scm.com/downloads)
 2. Clone [repository](https://bitbucket.org/ismdigitalia/kaliti-web/)
 3. Install [Docker](https://docker.com)
-4. Run make init command
+4. Create `.env` file and configure this file
+ ```
+ $ cp .env.dist .env
+ ```
+5. Run project
+ ```
+ $ make init
+ ```
 
 #####Database credentials:
 
